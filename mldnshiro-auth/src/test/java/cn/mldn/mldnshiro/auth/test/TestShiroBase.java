@@ -15,10 +15,11 @@ import org.apache.shiro.util.Factory;
 import junit.framework.TestCase;
 
 public class TestShiroBase extends TestCase {
-	private static final String USERNAME = "mldn"; // 用户输入的用户名
-	private static final String PASSWORD = "java"; // 用户输入的密码
+	private static final String USERNAME = "mermaid"; // 用户输入的用户名
+	private static final String PASSWORD = "hello"; // 用户输入的密码
 
 	public void testAuth() { // 进行认证的处理操作测试 
+		
 		// 1、定义安全管理的控制工厂类，现在的安全管理的信息都是通过配置文件定义出来的
 		Factory<org.apache.shiro.mgt.SecurityManager> securityManagerFactory = new IniSecurityManagerFactory(
 				"classpath:shiro.ini");
@@ -35,7 +36,6 @@ public class TestShiroBase extends TestCase {
 		try {
 			subject.login(token); // 登录认证，登录失败抛出异常
 			System.err.println("用户认证通过（登录成功），用户名为" + subject.getPrincipal()); // 获取用户名
-			subject.checkPermission("dept:list") ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
