@@ -1,0 +1,9 @@
+2017-10-24 09:59:48,489 INFO [org.apache.shiro.session.mgt.AbstractValidatingSessionManager] - Enabling session validation scheduler...
+2017-10-24 11:11:00,073 INFO [org.apache.shiro.config.IniSecurityManagerFactory] - Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+2017-10-24 11:11:14,445 INFO [org.apache.shiro.config.IniSecurityManagerFactory] - Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+2017-10-24 11:11:26,243 INFO [org.apache.shiro.config.IniSecurityManagerFactory] - Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+2017-10-24 11:11:26,258 INFO [org.apache.shiro.session.mgt.AbstractValidatingSessionManager] - Enabling session validation scheduler...
+2017-10-24 11:28:20,571 INFO [org.apache.shiro.config.IniSecurityManagerFactory] - Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+2017-10-24 11:28:20,794 INFO [org.apache.shiro.session.mgt.AbstractValidatingSessionManager] - Enabling session validation scheduler...
+2017-10-24 11:28:30,770 INFO [org.apache.shiro.config.IniSecurityManagerFactory] - Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+2017-10-24 11:28:44,682 INFO [org.apache.shiro.config.IniSecurityManagerFactory] - Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.

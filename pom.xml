@@ -304,5 +304,6 @@
 	<modules>
 		<module>mldnshiro-base</module>
 		<module>mldnshiro-realm</module>
+		<module>mldnshiro-auth</module>
 	</modules>
 </project>
