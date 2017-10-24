@@ -8,8 +8,8 @@
 		<artifactId>mldnshiro</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	<artifactId>mldnshiro-base</artifactId>
-	<name>mldnshiro-base</name>
+	<artifactId>mldnshiro-realm</artifactId>
+	<name>mldnshiro-realm</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
