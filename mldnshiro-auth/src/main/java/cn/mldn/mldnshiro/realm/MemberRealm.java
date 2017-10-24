@@ -8,6 +8,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
@@ -39,9 +40,14 @@ public class MemberRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		// 此方法主要用于用户的授权处理操作
+		// 此方法主要用于用户的授权处理操作，授权一定要在认证之后进行
 		System.err.println("=========== 2、进行用户授权处理操作（doGetAuthorizationInfo()） ===========");
-		return null;
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo() ;	// 返回授权的信息
+		String mid = (String) principals.getPrimaryPrincipal() ;	// 获得用户名
+		IMemberService memberService = new MemberServiceImpl() ;
+		info.setRoles(memberService.listRoleByMember(mid)); // 将所有的角色信息保存在授权信息中
+		info.setStringPermissions(memberService.listActionByMember(mid)); // 保存所有的权限
+		return info ;
 	}
-
+ 
 }

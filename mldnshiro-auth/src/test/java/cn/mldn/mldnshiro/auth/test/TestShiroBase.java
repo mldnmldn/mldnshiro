@@ -15,7 +15,7 @@ import org.apache.shiro.util.Factory;
 import junit.framework.TestCase;
 
 public class TestShiroBase extends TestCase {
-	private static final String USERNAME = "mermaid"; // 用户输入的用户名
+	private static final String USERNAME = "admin"; // 用户输入的用户名
 	private static final String PASSWORD = "hello"; // 用户输入的密码
 
 	public void testAuth() { // 进行认证的处理操作测试 
@@ -36,6 +36,10 @@ public class TestShiroBase extends TestCase {
 		try {
 			subject.login(token); // 登录认证，登录失败抛出异常
 			System.err.println("用户认证通过（登录成功），用户名为" + subject.getPrincipal()); // 获取用户名
+			System.err.println(subject.hasRole("dept"));
+			System.err.println(subject.hasRole("dept"));
+			System.err.println(subject.hasRole("dept"));
+			System.err.println(subject.isPermitted("dept:list"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
