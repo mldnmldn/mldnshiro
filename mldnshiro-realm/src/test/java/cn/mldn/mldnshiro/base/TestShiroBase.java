@@ -12,8 +12,8 @@ import junit.framework.TestCase;
 
 
 public class TestShiroBase extends TestCase {
-	private static final String USERNAME = "admin" ;	// 用户输入的用户名
-	private static final String PASSWORD = "hello" ;	// 用户输入的密码
+	private static final String USERNAME = "sadmin" ;	// 用户输入的用户名
+	private static final String PASSWORD = "hellssso" ;	// 用户输入的密码
 	public void testAuth() { // 进行认证的处理操作测试
 		// 1、定义安全管理的控制工厂类，现在的安全管理的信息都是通过配置文件定义出来的
 		Factory<org.apache.shiro.mgt.SecurityManager> securityManagerFactory = new IniSecurityManagerFactory("classpath:shiro.ini");

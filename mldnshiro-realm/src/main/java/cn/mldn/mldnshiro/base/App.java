@@ -1,5 +1,9 @@
 package cn.mldn.mldnshiro.base;
 
+import org.apache.shiro.realm.jdbc.JdbcRealm;
+
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 /**
  * Hello world!
  *
