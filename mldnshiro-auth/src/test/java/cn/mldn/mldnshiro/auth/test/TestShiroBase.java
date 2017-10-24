@@ -1,6 +1,7 @@
 package cn.mldn.mldnshiro.auth.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,12 +35,7 @@ public class TestShiroBase extends TestCase {
 		try {
 			subject.login(token); // 登录认证，登录失败抛出异常
 			System.err.println("用户认证通过（登录成功），用户名为" + subject.getPrincipal()); // 获取用户名
-//			subject.checkRole("member") ;	// 判断是否具有member的角色
-//			System.err.println("该用户拥有member角色信息。");
-			List<String> ownRoles = new ArrayList<String>() ;
-			Collections.addAll(ownRoles,"member","news") ;
-			subject.checkRoles(ownRoles) ;
-			System.err.println("该用户拥有news角色信息。");
+			subject.checkPermission("dept:list") ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
