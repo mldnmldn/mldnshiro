@@ -21,6 +21,8 @@
 		<jackson.version>2.9.2</jackson.version>
 		<!-- 【AFTER】配置Spring的版本管理【AFTER】 -->
 		<jstl.version>1.2</jstl.version>
+		<servlet-api.version>4.0.0</servlet-api.version>
+		<jsp-api.version>2.2</jsp-api.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
 		<compiler.version>3.6.1</compiler.version>
@@ -80,6 +82,19 @@
 				<artifactId>jstl</artifactId>
 				<version>${jstl.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>${jsp-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>cn.mldn</groupId>
 				<artifactId>mldnmybatis-util</artifactId>
@@ -305,5 +320,6 @@
 		<module>mldnshiro-base</module>
 		<module>mldnshiro-realm</module>
 		<module>mldnshiro-auth</module>
+		<module>mldnshiro-web</module>
 	</modules>
 </project>
