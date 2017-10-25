@@ -4,8 +4,22 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 	<display-name>mldnshiro-ssm-web</display-name>
-	
-
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errors.action</location>
+	</error-page>
+	<error-page>
+		<exception-type>
+			org.apache.shiro.authz.UnauthorizedException
+		</exception-type>
+		<location>/errors.action</location>
+	</error-page> 
+	<error-page>
+		<exception-type>
+			org.apache.shiro.authz.AuthorizationException
+		</exception-type>
+		<location>/errors.action</location>
+	</error-page> 
 
 	<listener>
 		<listener-class>
