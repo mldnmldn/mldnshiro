@@ -23,6 +23,7 @@ public class DeptActionBack {
 	@RequestMapping("dept_add")
 	@ResponseBody
 	public Object add(Dept vo) {
+		
 		return this.deptService.add(vo) ;
 	}
 //	@RequiresRoles("dept")
