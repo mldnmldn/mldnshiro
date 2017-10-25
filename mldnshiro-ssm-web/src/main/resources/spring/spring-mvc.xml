@@ -13,13 +13,13 @@
 	<context:annotation-config/>	<!-- 启用注解配置 -->
 	<context:component-scan base-package="cn.mldn"/>
 	<!-- 定义控制器的代理配置处理操作，即：需要使用注解进行路径拦截操作中起作用 -->
-	<bean id="controllerDefaultAdvisorAutoProxyCreator"
+	<bean id="defaultAdvisorAutoProxyCreator"
 		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true"/>	<!-- 代理转换 -->
 	</bean> 
 	<!-- 以上配置了要使用的代理类，但是需要在安全管理器之中配置一个拦截器 -->
-	<bean id="controllerAuthorizationAttributeSourceAdvisor" 
+	<bean id="authorizationAttributeSourceAdvisor" 
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<!-- 引入要使用的安全管理器 -->
 		<property name="securityManager" ref="securityManager"/>

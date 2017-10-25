@@ -17,23 +17,23 @@ import cn.mldn.mldnshiro.ssm.vo.Dept;
 public class DeptActionBack {
 	@Resource
 	private IDeptServiceBack deptService ;
-	@RequiresAuthentication	// 已经认证过
-	@RequiresRoles("dept")
-	@RequiresPermissions("dept:add")
+//	@RequiresAuthentication	// 已经认证过
+//	@RequiresRoles("dept")
+//	@RequiresPermissions("dept:add")
 	@RequestMapping("dept_add")
 	@ResponseBody
 	public Object add(Dept vo) {
 		return this.deptService.add(vo) ;
 	}
-	@RequiresRoles("dept")
-	@RequiresPermissions("dept:list")
+//	@RequiresRoles("dept")
+//	@RequiresPermissions("dept:list")
 	@RequestMapping("dept_list")
 	@ResponseBody
 	public Object list() {
 		return this.deptService.list() ;
 	}
-	@RequiresRoles("dept")
-	@RequiresPermissions("dept:remove")
+//	@RequiresRoles("dept")
+//	@RequiresPermissions("dept:remove")
 	@RequestMapping("dept_remove")
 	@ResponseBody
 	public Object remove(Long deptno) { 
