@@ -14,7 +14,19 @@
 		<property name="cacheManagerConfigFile" value="classpath:shiro/ehcache.xml"/>
 	</bean>
 	
+	<!-- 定义一个Cookie记住我的功能管理器 -->
+	<bean id="remembermeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<!-- 定义要进行记住我功能的Cookie处理对象 -->
+		<property name="cookie" ref="remembermeCookie"/>
+	</bean>
 	
+	<!-- 设置RememberMe的Cookie存储配置类，使用的类同SessionIdCookie -->
+	<bean id="remembermeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- 在进行Cookie存储的时候都会存储一组信息，而这组信息一定是加密的 -->
+		<property name="name" value="mldnjava-rememberme"/>
+		<!-- 很多时候RememberMe可能只记录30天左右，如果不设置则无限长 -->
+		<property name="maxAge" value="2592000"/>
+	</bean>
 	
 	<!-- 定义项目之中要使用的认证与授权处理的Realm对象，该对象一定要配置到安全管理器之中 -->
 	<bean id="memberRealm" class="cn.mldn.mldnshiro.ssm.realm.MemberRealm"/>
@@ -40,6 +52,8 @@
 		<property name="cacheManager" ref="cacheManager"/>
 		<!-- 配置在安全管理器之中要使用的Session管理器 -->
 		<property name="sessionManager" ref="sessionManager"/>
+		<!-- 将RememberMe管理器配置到安全管理器之中 -->
+		<property name="rememberMeManager" ref="remembermeManager"/>
 	</bean>
 	
 	
@@ -76,7 +90,9 @@
 		<property name="loginUrl" value="/loginForm.action"/>
 		<!-- 配置登录的相关错误信息显示的属性名称，此处配置为error -->
 		<property name="failureKeyAttribute" value="error"/>
-	</bean>
+		<!-- 配置rememberme选项的操作参数 -->
+		<property name="rememberMeParam" value="rememberme"/>
+	</bean> 
 	<!-- 配置文件里面已经将所有的配置交由Spring负责了，所以对于过滤的处理操作一定要交给指定的类完成配置 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<!-- 在此过滤管理之中定义要使用的安全管理器 -->
@@ -100,7 +116,7 @@
 			<value>
 				/logout.page=logout
 				/loginForm.action=authc
-				/pages/back/**=authc
+				/pages/back/**=user
 			</value>
 		</property>
 	</bean> 

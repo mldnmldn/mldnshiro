@@ -22,8 +22,9 @@
 <form action="<%=login_url%>" method="post">
 	用户名：<input type="text" name="mid" id="mid"/><br/>
 	密码：<input type="password" name="password" id="password"/><br/>
+	<input type="checkbox" name="rememberme" value="true">下次免登录
 	<input type="submit" value="登录"/>
-</form>
+</form> 
 </shiro:notAuthenticated> 
 </body>
 </html>

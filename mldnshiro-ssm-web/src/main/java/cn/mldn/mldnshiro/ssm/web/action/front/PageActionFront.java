@@ -13,6 +13,7 @@ public class PageActionFront {
 	}
 	@RequestMapping("/pages/back/welcome")
 	public String welcome() {
+		
 		return "back/welcome" ;
 	}
 	@RequestMapping("/logout")
