@@ -29,7 +29,11 @@
 	</bean>
 	
 	<!-- 定义项目之中要使用的认证与授权处理的Realm对象，该对象一定要配置到安全管理器之中 -->
-	<bean id="memberRealm" class="cn.mldn.mldnshiro.ssm.realm.MemberRealm"/>
+	<bean id="memberRealm" class="cn.mldn.mldnshiro.ssm.realm.MemberRealm">
+		<property name="credentialsMatcher">
+			<bean class="cn.mldn.util.DefaultCredentialsMatcher"/>
+		</property>
+	</bean> 
 	
 	<!-- 配置SessionManager，进行Session管理操作 -->
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">

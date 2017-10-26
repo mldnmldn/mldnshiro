@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,6 +20,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import cn.mldn.mldnshiro.ssm.service.front.IMemberServiceFront;
 import cn.mldn.mldnshiro.ssm.vo.Member;
+import cn.mldn.util.enctype.PasswordUtil;
 public class MemberRealm extends AuthorizingRealm {
 	@Resource
 	private IMemberServiceFront memberService ;
@@ -30,15 +32,16 @@ public class MemberRealm extends AuthorizingRealm {
 		Member member = this.memberService.get(mid) ;	// 根据用户名查询出用户的完整信息
 		if (member == null) {	// 用户信息不存在，不存在的信息应该抛出未知的账户异常
 			throw new UnknownAccountException("账户“"+mid+"”不存在。") ;
-		}
-		String password = new String((char[]) token.getCredentials()) ;	// 获得密码
+		}	// 需要对密码进行加密处理，因为从数据库之中取出的密码是加密后的文字信息
+		String password = PasswordUtil.encoder(new String((char[]) token.getCredentials())) ;	// 获得密码
 		if (!member.getPassword().equals(password)) { // 用户名或密码错误；
 			throw new IncorrectCredentialsException("错误的用户名或密码！") ;
 		}
 		if (member.getLocked().equals(1)) {	// 用户被锁定了
 			throw new LockedAccountException(mid + "账户信息已经被锁定，无法登录！") ;
-		}
-		return new SimpleAuthenticationInfo(token.getPrincipal(), token.getCredentials(), "memberRealm");
+		}	// 要传递加密后的密码数据信息
+		SecurityUtils.getSubject().getSession().setAttribute("name", member.getName());
+		return new SimpleAuthenticationInfo(token.getPrincipal(), password.toCharArray(), "memberRealm");
 	}
 
 	@Override
