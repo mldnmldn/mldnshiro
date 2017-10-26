@@ -18,12 +18,50 @@
 	
 	<!-- 定义项目之中要使用的认证与授权处理的Realm对象，该对象一定要配置到安全管理器之中 -->
 	<bean id="memberRealm" class="cn.mldn.mldnshiro.ssm.realm.MemberRealm"/>
+	
+	<!-- 配置SessionManager，进行Session管理操作 -->
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- 定义SessionID的生成规则以及数据操作对象 -->
+		<property name="sessionDAO" ref="sessionDAO"/>
+		<!-- 定义的是SessionID的Cookie保存策略操作 -->
+		<property name="sessionIdCookie" ref="sessionIdCookie"/>
+		<!-- 设置一个全局的Session失效时间，WEB中的时间就将失效，秒，如果不设置为30分钟 -->
+		<property name="globalSessionTimeout" value="10000"/>
+		<!-- 当Session失效之后，应该利用此调度器删除掉无用的Session数据 -->
+		<property name="deleteInvalidSessions" value="true"/>
+		<!-- 默认启用Cookie进行SessionID存储 -->
+		<property name="sessionIdCookieEnabled" value="true"/>
+	</bean>
+	
 	<!-- 定义Shiro的安全管理器，所有的认证与授权处理一定要首先交给安全处理器进行管理 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="memberRealm"/>	<!-- 配置要使用的Realm对象 -->
 		<!-- 定义要使用的缓存组件，本次使用的是EHCache -->
 		<property name="cacheManager" ref="cacheManager"/>
+		<!-- 配置在安全管理器之中要使用的Session管理器 -->
+		<property name="sessionManager" ref="sessionManager"/>
 	</bean>
+	
+	
+	<!-- 定义一个Shiro自己的SessionID生成器 -->
+	<bean id="sessionIdGenerator" 
+		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+	<!-- 所有的SessionID最终一定要进行数据的存储操作，那么既然要进行存储，现在就需要定义一个Session的数据处理操作 -->
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<!-- 定义在进行Session管理之中所使用的缓存策略 -->
+		<property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
+		<!-- 获得生成的SessionID数据 -->
+		<property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+	</bean>
+	<!-- 配置SessionID的Cookie存储策略操作 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- 设置的是要保存的Cookie名字，默认Tomcat的保存Cookie名称为JSESSIONID -->
+		<property name="name" value="mldn-session-id"/>
+	</bean>
+	
+	
+	
+	
 	<!-- 配置注销登录的过滤器 -->
 	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 		<!-- 注销之后的跳转路径 -->
